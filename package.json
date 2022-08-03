@@ -1,0 +1,21 @@
+{
+  "name": "fcm-v1",
+  "version": "1.0.0",
+  "description": "firebase push notification v1",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "keywords": [
+    "fcm",
+    "push",
+    "notification"
+  ],
+  "author": "Shohrab",
+  "license": "ISC",
+  "dependencies": {
+    "google-auth-library": "^8.1.1",
+    "googleapis": "^105.0.0",
+    "https": "^1.0.0"
+  }
+}
