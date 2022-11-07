@@ -14,8 +14,10 @@
   "author": "Shohrab",
   "license": "ISC",
   "dependencies": {
+    "firebase-admin": "^11.1.0",
     "google-auth-library": "^8.1.1",
     "googleapis": "^105.0.0",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "nodemon": "^2.0.20"
   }
 }

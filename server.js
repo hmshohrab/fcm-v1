@@ -77,7 +77,7 @@ function sendFcmMessage(fcmMessage) {
 }
 
 /**
- * Construct a JSON object that will be used to customize
+ * Construct a JSON object that will be used toheader customize
  * the messages sent to iOS and Android devices.
  */
 function buildOverrideMessage() {
@@ -89,7 +89,10 @@ function buildOverrideMessage() {
             }
         },
         'headers': {
-            'apns-priority': '10'
+            //  'apns-priority': '10',
+            "apns-push-type": "background",
+            "apns-priority": "5", // Must be `5` when `contentAvailable` is set to true.
+            "apns-topic": "io.flutter.plugins.firebase.messaging",
         }
     };
 
@@ -113,7 +116,7 @@ function buildOverrideMessage() {
 function buildCommonMessage() {
     return {
         'message': {
-            'topic': 'USER.8801878036425',
+            'topic': 'all_user',
             'notification': {
                 'title': 'FCM Notification',
                 'body': 'I hope you enjoyed this post. I will also come up with some more blogs. Have a Nice Day.✌️'
@@ -144,11 +147,13 @@ function buildCommonMessage(topic, data) {
 
 const message = process.argv[2];
 if (message && message == 'common-message') {
-    let data= {'title':"hello",'body':"World",
-    "consultantId":"62a45480c2fc102b655f226e","userId":"6291e0126b08911735300d50",
-    route:"review"};
+    let data = {
+        'title': "hello", 'body': "World",
+        "consultantId": "62a45480c2fc102b655f226e", "userId": "6291e0126b08911735300d50",
+        route: "review"
+    };
     //You must pass this data for consultant review
-    const commonMessage = buildCommonMessage("USER.8801878036425",data);
+    const commonMessage = buildCommonMessage("USER.8801878036426", data);
     console.log('FCM request body for message using common notification object:');
     console.log(JSON.stringify(commonMessage, null, 2));
     sendFcmMessage(commonMessage);
@@ -159,6 +164,6 @@ if (message && message == 'common-message') {
     sendFcmMessage(buildOverrideMessage());
 } else {
     console.log('Invalid command. Please use one of the following:\n'
-        + 'node index.js common-message\n'
-        + 'node index.js override-message');
+        + 'node server.js common-message\n'
+        + 'node server.js override-message');
 }
